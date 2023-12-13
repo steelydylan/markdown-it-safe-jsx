@@ -35,5 +35,10 @@ export function useHydrateJsx(
         roots.push(root);
       }
     });
+    // return () => {
+    //   roots.forEach((root) => {
+    //     root.unmount();
+    //   });
+    // };
   }, deps);
 }
