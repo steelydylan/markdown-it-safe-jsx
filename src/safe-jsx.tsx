@@ -24,7 +24,11 @@ function evaluateExpression(node: Node, source: string) {
     const obj: Record<string, unknown> = {};
     node.properties.forEach((prop) => {
       if (prop.type === "Property") {
-        obj[prop.key.name] = evaluateExpression(prop.value, source);
+        if (prop.key.type === "Identifier") {
+          obj[prop.key.name] = evaluateExpression(prop.value, source);
+        } else if (prop.key.type === "Literal") {
+          obj[prop.key.value] = evaluateExpression(prop.value, source);
+        }
       }
     });
     return obj;
